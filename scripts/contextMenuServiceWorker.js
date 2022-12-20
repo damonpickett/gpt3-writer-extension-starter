@@ -49,6 +49,7 @@ const generate = async (prompt) => {
 
 const generateCompletionAction = async (info) => {
   try {
+    sendMessage('generating...');
     const { selectionText } = info;
     const basePromptPrefix = `
     Generate an Outline for a story about a historical subject
@@ -72,9 +73,12 @@ Story:
     `;
 
     const secondPromptCompletion = await generate(secondPrompt);
-      console.log(secondPromptCompletion.text)
+    sendMessage(secondPromptCompletion.text);
+
   } catch (error) {
     console.log(error);
+
+    sendMessage(error.toString());
   }
 };
 
